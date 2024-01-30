@@ -1,0 +1,56 @@
+Q1)How many images are downloaded
+   6 images
+   REPOSITORY                    TAG       IMAGE ID       CREATED        SIZE
+ahmedyasser9/osc-server       latest    869a278ce879   3 days ago     14.5MB
+alpine                        latest    05455a08881e   3 days ago     7.38MB
+busybox                       latest    3f57d9401f8d   12 days ago    4.26MB
+mongo                         latest    7ee26c8012da   3 weeks ago    757MB
+erseco/alpine-php-webserver   latest    4f382c58302d   5 weeks ago    73MB
+nginx                         latest    a8758716bb6a   3 months ago   187MB
+
+Q2) Create a container from alpine and has it print out what is inside /etc/hostname file
+
+   habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker run alpine cat /etc/hostname
+   31802c5685ad
+
+
+Q3)Download ubuntu image with the noble tag
+   habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker pull ubuntu:noble
+   noble: Pulling from library/ubuntu
+   6d0aa570c8bf: Pull complete
+   Digest: sha256:50cb325cf61fa0ac0f42c2ea431d8ef091fe3d36f5bc039d15f89c569ff4988e
+   Status: Downloaded newer image for ubuntu:noble
+   docker.io/library/ubuntu:noble
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview ubuntu:noble
+
+Q4) Run a container using erseco/alpine-php-webserver image and detach it
+   
+   habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker run -d erseco/alpine-php-webserver
+
+Q5)The above image erseco/alpine-php-webserver is a web server that runs on port 8080, how can we map it to port 55 on our host?
+   habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker run -d -p 55:8080 erseco/alpine-php-webserver
+   a24cd2e163a67848aeb2ef6f85f209fe856d6704b2d1f8937635e85ca7bff2cc
+
+Q6) Search for the container you ran in Q4 and stop it then delete it
+
+   habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker ps -a
+CONTAINER ID   IMAGE                         COMMAND                  CREATED             STATUS                         PORTS                  NAMES
+a24cd2e163a6   erseco/alpine-php-webserver   "/bin/docker-entrypo…"   6 minutes ago       Up 6 minutes (unhealthy)       0.0.0.0:55->8080/tcp   objective_wu
+03a920368ec1   erseco/alpine-php-webserver   "/bin/docker-entrypo…"   50 minutes ago      Exited (143) 12 minutes ago                           blissful_spence
+31802c5685ad   alpine                        "cat /etc/hostname"      About an hour ago   Exited (0) About an hour ago                          infallible_leavitt
+553ac79f192e   nginx                         "/docker-entrypoint.…"   3 hours ago         Exited (255) 2 hours ago       80/tcp                 cool_knuth
+habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker stop 03a
+03a
+habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker rm 03a
+03a
+habiba@DESKTOP-DSUTLLC:/mnt/d/learning/Docker$ docker ps -a
+CONTAINER ID   IMAGE                         COMMAND                  CREATED             STATUS                         PORTS                  NAMES
+a24cd2e163a6   erseco/alpine-php-webserver   "/bin/docker-entrypo…"   8 minutes ago       Up 8 minutes (unhealthy)       0.0.0.0:55->8080/tcp   objective_wu
+31802c5685ad   alpine                        "cat /etc/hostname"      About an hour ago   Exited (0) About an hour ago                          infallible_leavitt
+553ac79f192e   nginx                         "/docker-entrypoint.…"   3 hours ago         Exited (255) 2 hours ago       80/tcp                 cool_knuth
+
+
+
+   
